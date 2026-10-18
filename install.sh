@@ -32,7 +32,7 @@ merge_rules() {
   fi
 }
 
-# Add our hooks to .claude/settings.json, keeping the user's settings.
+# Add our hooks and permission rules to .claude/settings.json, keeping the user's settings.
 merge_settings() {
   local rel=".claude/settings.json"
   if [ ! -e "$DEST/$rel" ]; then
@@ -55,8 +55,12 @@ for (const [event, groups] of Object.entries(ours.hooks)) {
     added++;
   }
 }
+for (const rule of ours.permissions?.allow ?? []) {
+  const allow = ((theirs.permissions ??= {}).allow ??= []);
+  if (!allow.includes(rule)) { allow.push(rule); added++; }
+}
 if (added) fs.writeFileSync(dest, JSON.stringify(theirs, null, 2) + "\n");
-console.log(`  ${added ? "merge " : "skip  "}  .claude/settings.json${added ? "" : " (hooks already present)"}`);
+console.log(`  ${added ? "merge " : "skip  "}  .claude/settings.json${added ? "" : " (already up to date)"}`);
 JS
   fi
 }
@@ -69,6 +73,8 @@ copy_new .infinitoken/session.md
 copy_new .claude/commands/save.md
 copy_new .claude/commands/resume.md
 copy_new .infinitoken/codemap.mjs
+copy_new .infinitoken/squeeze.mjs
+copy_new .infinitoken/.gitignore
 merge_settings
 
 if command -v node >/dev/null; then

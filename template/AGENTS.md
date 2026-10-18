@@ -18,6 +18,9 @@ Goal: zero wasted tokens. Never cut reasoning on hard problems; cut everything a
 - Prefer quiet flags: `-q`, `--silent`, `--reporter=dot`, `| tail -n 40`.
 - For tests, run the narrowest scope first (one file / one test), full suite last.
 - Never print large files, lockfiles, build output or logs in full; grep or tail them.
+- Long output may be shortened to errors + summary, with the full text saved in `.infinitoken/logs/`. Grep that file instead of re-running the command. Append `# raw` to a command only if you truly need its full output.
+- `[infinitoken] Failure detected` means the command failed, even if the exit code looks fine.
+- Without the hook, pipe noisy commands through it: `npm test 2>&1 | node .infinitoken/squeeze.mjs`.
 
 ## Editing
 - Edit the exact lines that change; don't rewrite whole files.
