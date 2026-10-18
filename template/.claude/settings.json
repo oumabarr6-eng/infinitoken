@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.infinitoken/codemap.mjs\" \"$CLAUDE_PROJECT_DIR\" >/dev/null 2>&1 || true"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -5,7 +5,8 @@ Goal: zero wasted tokens. Never cut reasoning on hard problems; cut everything a
 
 ## Start of session
 - Read `.infinitoken/memory.md` and `.infinitoken/session.md` first. Trust them; don't re-discover what they say.
-- If `CODEMAP.md` exists, use it to locate code instead of exploring folders.
+- To locate code, read `.infinitoken/codemap.md` before exploring folders.
+- After adding, moving or deleting files, run `node .infinitoken/codemap.mjs`.
 
 ## Reading code
 - Search (grep / glob) before opening files. Open only files you need.
